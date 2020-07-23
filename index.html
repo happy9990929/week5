@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <title>API作業</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3.3.2/dist/vue-loading.css"/>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', 'SimHei';
+        }
+
+        .org {
+            text-decoration: line-through;
+        }
+
+        .productImg {
+            width: 100%;
+            height: 300px;
+            background-position: center center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <loading :active.sync="isLoading"></loading>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Dessert</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse show" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">鬆餅<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">蛋糕</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">冰淇淋</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">飲料</a>
+                    </li>
+                </ul>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <div class="container">
+            <div>
+                <product-list :products="products" @add-to-cart="addToCart"/>
+            </div>
+            <div>
+                <cart :cart="cart" :cart-total="cartTotal" @quantity-updata="quantityUpdata" @remove-cart-item="removeCartItem" @remove-all="removeAllCartItem"/>
+            </div>
+            <div>
+                <form-info @submit-form="submitForm" :form="form"/>
+            </div>
+        </div>
+        
+        
+        <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">完成訂單</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <p>恭喜你已完成訂單。</p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <footer class="p-3 bg-dark text-white text-center">
+            圖片取自 unsplash 無商業用途，僅供學習使用
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="./js/fontawesome5.13.1_all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vee-validate/3.3.0/vee-validate.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3.3.2/dist/vue-loading.min.js"></script>
+    <script src="./js/main.js" type="module"></script>
+</body>
+
+</html>
